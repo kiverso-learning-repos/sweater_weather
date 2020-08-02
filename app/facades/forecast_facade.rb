@@ -5,6 +5,8 @@ class ForecastFacade
     @forecast = get_forecast
   end
 
+  private
+
   def get_location(location)
     map_service = MapService.new
     location_data = map_service.location(location)
@@ -12,8 +14,8 @@ class ForecastFacade
   end
 
   def get_forecast
-    forecast_service = ForecastService.new
-    forecast = forecast_service.forecast(@location.latitude, @location.longitude)
-    Forecast.new(forecast)
+    weather_service = WeatherService.new
+    forecast_data = weather_service.forecast(@location.latitude, @location.longitude)
+    Forecast.new(forecast_data)
   end
 end
