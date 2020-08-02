@@ -22,6 +22,7 @@ gem 'rspec-rails'
 gem 'fast_jsonapi'
 gem 'figaro'
 gem 'pry'
+gem 'faraday'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
