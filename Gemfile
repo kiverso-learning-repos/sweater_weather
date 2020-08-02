@@ -21,6 +21,7 @@ gem 'puma', '~> 3.7'
 gem 'rspec-rails'
 gem 'fast_jsonapi'
 gem 'figaro'
+gem 'pry'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -42,6 +43,8 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'webmock'
+  gem 'vcr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
