@@ -5,8 +5,7 @@ class WeatherService < GeneralService
               lon: longitude,
               units: 'imperial',
               exclude: 'minutely'}
-    x = get_json('/data/2.5/onecall', params)
-    binding.pry
+    get_json('/data/2.5/onecall', params)
   end
 
   private
