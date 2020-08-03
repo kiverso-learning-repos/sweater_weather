@@ -4,6 +4,8 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: UserSerializer.new(user)
     else
+      data = { errors: user.errors.full_messages.uniq }
+      render json: data, status: :bad_request
     end
   end
 
