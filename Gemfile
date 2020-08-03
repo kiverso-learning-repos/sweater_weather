@@ -23,6 +23,7 @@ gem 'fast_jsonapi'
 gem 'figaro'
 gem 'pry'
 gem 'faraday'
+gem 'bcrypt'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -46,6 +47,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'webmock'
   gem 'vcr'
+  gem 'shoulda-matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
