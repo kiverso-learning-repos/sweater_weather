@@ -5,11 +5,12 @@ RSpec.describe "Api::V1::Users", type: :request do
   describe "post /create" do
     it "returns http success" do
       request_params = {
-                        email: "whatever@example.com",
-                        password: "password",
-                        password_confirmation: "password"
-                        }
-      post "/api/v1/users", params: request_params
+              email: "whatever@example.com",
+              password: "password",
+              password_confirmation: "password"
+              }
+
+      post "/api/v1/users", params: request_params.to_json, headers: { "Content-Type": "application/json" }
       expect(response).to have_http_status(:success)
                       
       user = JSON.parse(response.body, symbolize_names: true)
