@@ -4,9 +4,8 @@ class Api::V1::BackgroundsController < ApplicationController
     location = Location.new(location_data)
     forecast_data = WeatherService.new.forecast(location.latitude, location.longitude)
     forecast = Forecast.new(forecast_data)
-    binding.pry
     image_data = ImageService.new.background(forecast.current[:weather][0][:description])
-    Background.new(image_data)
+    render json: BackgroundSerializer.new(Background.new(image_data[:results][0]))
   end
 
 end
