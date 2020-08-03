@@ -1,7 +1,7 @@
 class ImageService < GeneralService
 
   def background(search_param)
-    params = {query: search_param_param}
+    params = {query: search_param}
     get_json('/search/photos', params)
   end
 
