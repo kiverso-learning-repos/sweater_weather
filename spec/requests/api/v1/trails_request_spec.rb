@@ -19,6 +19,7 @@ RSpec.describe "Api::V1::Trails", type: :request do
         expect(trail[:difficulty]).to_not be_nil
         expect(trail[:location]).to_not be_nil
         expect(trail[:distance_to_trail]).to_not be_nil
+        expect(trail[:estimated_travel_time]).to_not be_nil
       end
     end
   end
