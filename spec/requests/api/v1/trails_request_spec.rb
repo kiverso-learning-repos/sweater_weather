@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Api::V1::Trails", type: :request do
 
   describe "GET /trails" do
-    it "returns http success" do
+    it "returns http success", :vcr do
       request_params = {location: 'denver,co'}
       get "/api/v1/trails", params: request_params
       expect(response).to have_http_status(:success)

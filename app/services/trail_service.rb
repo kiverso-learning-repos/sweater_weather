@@ -3,8 +3,7 @@ class TrailService < GeneralService
   def trails(latitude, longitude)
     params = {lat: latitude,
               lon: longitude}
-    x = get_json('/data/get-trails', params)
-    binding.pry
+    get_json('/data/get-trails', params)
   end
 
   private
