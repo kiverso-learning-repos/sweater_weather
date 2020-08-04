@@ -7,8 +7,8 @@ class RoadTripFacade < ForecastFacade
     @id = 'null'
     @origin = directions.origin
     @destination = directions.destination
-    @destination = directions.travel_time
-    @arrival_forecast = format_forcast(forecast)
+    @travel_time = directions.travel_time
+    @arrival_forecast = format_arrival_forecast(forecast)
   end
 
   def get_directions(origin, destination)
@@ -17,8 +17,10 @@ class RoadTripFacade < ForecastFacade
     Direction.new(location_data)
   end
 
-  def format_forecast(forecast)
-    {summary: forecast.current[:weather][0][:description],
-     temperature: forecast.current[:temp]}
+  def format_arrival_forecast(forecast)
+    hours = (@travel_time.to_f / 3600.00).round
+    
+    {summary: forecast.hourly[hours][:weather][0][:description],
+     temperature: forecast.hourly[hours][:temp]}
   end
 end
