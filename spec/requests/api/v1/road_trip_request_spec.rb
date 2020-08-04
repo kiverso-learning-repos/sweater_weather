@@ -30,6 +30,56 @@ RSpec.describe "Api::V1::RoadTrips", type: :request do
       expect(road_trip[:data][:attributes][:arrival_forecast][:temperature]).to_not be_nil
       expect(road_trip[:data][:attributes][:arrival_forecast][:summary]).to_not be_nil
     end
+
+    it "returns an error if api key is wrong" do
+      request_params = { 
+              origin: "Denver,CO",
+              destination: "Pueblo,CO",
+              api_key: 456
+              }
+
+      post "/api/v1/road_trip", params: request_params.to_json, headers: { "Content-Type": "application/json" }
+      expect(response).to have_http_status(:unauthorized)
+
+      errors = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(errors[:errors].length).to eq(1)
+      expect(errors[:errors].first).to eq('Invalid API key')
+    end
+
+    it "returns an error if origin is missing" do
+      request_params = { 
+              origin: "",
+              destination: "Pueblo,CO",
+              api_key: @user.api_key
+              }
+
+      post "/api/v1/road_trip", params: request_params.to_json, headers: { "Content-Type": "application/json" }
+      expect(response).to have_http_status(:bad_request)
+
+      errors = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(errors[:errors].length).to eq(1)
+      expect(errors[:errors].first).to eq('Origin and destination are required')
+    end
+
+    it "returns an error if destination is missing" do
+      request_params = { 
+              origin: "Denver, CO",
+              destination: "",
+              api_key: @user.api_key
+              }
+
+      post "/api/v1/road_trip", params: request_params.to_json, headers: { "Content-Type": "application/json" }
+      expect(response).to have_http_status(:bad_request)
+
+      errors = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(errors[:errors].length).to eq(1)
+      expect(errors[:errors].first).to eq('Origin and destination are required')
+    end
+
+    
   end
 
 end
