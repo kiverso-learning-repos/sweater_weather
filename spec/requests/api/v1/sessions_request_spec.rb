@@ -35,12 +35,12 @@ RSpec.describe "Api::V1::Sessions", type: :request do
               }
 
       post "/api/v1/sessions", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unauthorized)
                                               
       errors = JSON.parse(response.body, symbolize_names: true)
 
       expect(errors[:errors].count).to eq(1)
-      expect(errors[:errors].first).to eq("Invalid email or password")
+      expect(errors[:errors].first).to eq("Invalid email or password.")
     end
 
     it "returns an error if email is not present" do
@@ -49,12 +49,12 @@ RSpec.describe "Api::V1::Sessions", type: :request do
               }
 
       post "/api/v1/sessions", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unauthorized)
                                               
       errors = JSON.parse(response.body, symbolize_names: true)
 
       expect(errors[:errors].count).to eq(1)
-      expect(errors[:errors].first).to eq("Invalid email or password")
+      expect(errors[:errors].first).to eq("Invalid email or password.")
     end
 
     it "returns an error if password is not correct" do
@@ -64,12 +64,12 @@ RSpec.describe "Api::V1::Sessions", type: :request do
               }
 
       post "/api/v1/sessions", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unauthorized)
                                               
       errors = JSON.parse(response.body, symbolize_names: true)
 
       expect(errors[:errors].count).to eq(1)
-      expect(errors[:errors].first).to eq("Invalid email or password")
+      expect(errors[:errors].first).to eq("Invalid email or password.")
     end
   end
 end
