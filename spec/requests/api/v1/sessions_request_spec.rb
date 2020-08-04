@@ -22,7 +22,7 @@ RSpec.describe "Api::V1::Sessions", type: :request do
       session = JSON.parse(response.body, symbolize_names: true)
                         
       expect(session[:data][:type]).to eq('user')
-      expect(session[:data][:id]).to eq(@user.id)
+      expect(session[:data][:id]).to eq(@user.id.to_s)
       expect(session[:data][:attributes][:email]).to eq(@user.email)
       expect(session[:data][:attributes][:api_key]).to eq(@user.api_key)
       expect(session[:data][:attributes][:password]).to be_nil
