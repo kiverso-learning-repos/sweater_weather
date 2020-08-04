@@ -35,7 +35,7 @@ RSpec.describe "Api::V1::Sessions", type: :request do
               }
 
       post "/api/v1/sessions", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:bad_request)
                                               
       errors = JSON.parse(response.body, symbolize_names: true)
 
@@ -49,7 +49,7 @@ RSpec.describe "Api::V1::Sessions", type: :request do
               }
 
       post "/api/v1/sessions", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:bad_request)
                                               
       errors = JSON.parse(response.body, symbolize_names: true)
 
@@ -64,7 +64,7 @@ RSpec.describe "Api::V1::Sessions", type: :request do
               }
 
       post "/api/v1/sessions", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:bad_request)
                                               
       errors = JSON.parse(response.body, symbolize_names: true)
 
