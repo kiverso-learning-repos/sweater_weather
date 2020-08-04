@@ -11,7 +11,7 @@ RSpec.describe "Api::V1::RoadTrips", type: :request do
               })
     end
 
-    it "returns http success" do
+    it "returns http success", :vcr do
       request_params = { 
               origin: "Denver,CO",
               destination: "Pueblo,CO",
