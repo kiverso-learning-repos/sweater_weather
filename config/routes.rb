@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      post 'sessions', to: 'sessions#create'
       post 'users', to: 'users#create'
       get 'backgrounds', to: 'backgrounds#index'
       get '/forecast', to: 'forecasts#show'

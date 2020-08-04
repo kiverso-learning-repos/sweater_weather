@@ -84,7 +84,7 @@ RSpec.describe "Api::V1::Users", type: :request do
       expect(errors[:errors].first).to eq('Email has already been taken')
     end
 
-    it "will return multiple errors if multple validations fail" do
+    it "will return multiple errors if multiple validations fail" do
       request_params = {
               email: "whatever@example.com",
               password: "password1",
