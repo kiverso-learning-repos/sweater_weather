@@ -13,8 +13,9 @@ RSpec.describe "Api::V1::RoadTrips", type: :request do
 
     it "returns http success" do
       request_params = { 
-              email: "whatever@example.com",
-              password: "password"
+              origin: "Denver,CO",
+              destination: "Pueblo,CO",
+              api_key: @user.api_key
               }
 
       post "/api/v1/road_trip", params: request_params.to_json, headers: { "Content-Type": "application/json" }
