@@ -23,12 +23,12 @@ RSpec.describe "Api::V1::RoadTrips", type: :request do
 
       road_trip = JSON.parse(response.body, symbolize_names: true)
 
-      expect(forecast[:data][:attributes][:origin]).to eq('Denver, CO')
-      expect(forecast[:data][:attributes][:destination]).to eq('Pueblo, CO')
+      expect(road_trip[:data][:attributes][:origin]).to eq('Denver, CO')
+      expect(road_trip[:data][:attributes][:destination]).to eq('Pueblo, CO')
 
-      expect(forecast[:data][:attributes][:travel_time]).to_not be_nil
-      expect(forecast[:data][:attributes][:arrival_forecast][:temp]).to_not be_nil
-      expect(forecast[:data][:attributes][:arrival_forecast][:summary]).to_not be_nil
+      expect(road_trip[:data][:attributes][:travel_time]).to_not be_nil
+      expect(road_trip[:data][:attributes][:arrival_forecast][:temperature]).to_not be_nil
+      expect(road_trip[:data][:attributes][:arrival_forecast][:summary]).to_not be_nil
     end
   end
 
