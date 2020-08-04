@@ -2,7 +2,7 @@ class ForecastFacade
   attr_reader :id, :city, :state, :current_weather, :hourly_forecast, :daily_forecast, :timezone_offset
   def initialize(location)
     forecast_location = get_location(location)
-    forecast = get_forecast(forecast_location)
+    forecast = get_forecast(forecast_location.latitude, forecast_location.longitude)
     @id = SecureRandom.uuid
     @city = forecast_location.city
     @state = forecast_location.state
@@ -20,9 +20,9 @@ class ForecastFacade
     Location.new(location_data)
   end
 
-  def get_forecast(location)
+  def get_forecast(latitude, longitude)
     weather_service = WeatherService.new
-    forecast_data = weather_service.forecast(location.latitude, location.longitude)
+    forecast_data = weather_service.forecast(latitude, longitude)
     Forecast.new(forecast_data)
   end
 
