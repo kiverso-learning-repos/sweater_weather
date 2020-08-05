@@ -34,5 +34,15 @@ RSpec.describe "Api::V1::Forecasts", type: :request do
         expect(day[:precipitation]).to_not be_nil
       end
     end
+
+    it "returns errors when no location param is submitted" do
+      request_params = {}
+      get '/api/v1/forecast', params: request_params
+      expect(response).to have_http_status(:bad_request)
+      errors = JSON.parse(response.body, symbolize_names: true)
+
+      expect(errors[:errors].length).to eq(1)
+      expect(errors[:errors].first).to eq('Location is required.')
+    end
   end
 end
