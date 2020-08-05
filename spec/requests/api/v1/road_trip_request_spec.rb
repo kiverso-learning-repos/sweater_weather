@@ -87,12 +87,12 @@ RSpec.describe "Api::V1::RoadTrips", type: :request do
               }
 
       post "/api/v1/road_trip", params: request_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:bad_request)
+      expect(response).to have_http_status(:not_found)
 
       errors = JSON.parse(response.body, symbolize_names: true)
       
       expect(errors[:errors].length).to eq(1)
-      expect(errors[:errors].first).to eq('Looks like there was a problem finding these locations.')
+      expect(errors[:errors].first).to eq('Looks like we were unable to find these locations.')
     end
   end
 end

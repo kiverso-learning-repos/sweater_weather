@@ -6,7 +6,7 @@ class Api::V1::RoadTripController < ApplicationController
         begin
         road_trip = RoadTripFacade.new(road_trip_params[:origin], road_trip_params[:destination])
         rescue NoMethodError
-          return render json: {errors: ["Looks like there was a problem finding these locations."]}, status: :bad_request 
+          return render json: {errors: ["Looks like we were unable to find these locations."]}, status: :not_found
         end
         render json: RoadTripSerializer.new(road_trip)
       else render json: {errors: ['Origin and destination are required']}, status: :bad_request 
