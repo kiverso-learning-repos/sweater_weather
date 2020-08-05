@@ -79,7 +79,20 @@ RSpec.describe "Api::V1::RoadTrips", type: :request do
       expect(errors[:errors].first).to eq('Origin and destination are required')
     end
 
-    
-  end
+    it "returns an error if it can't find results", :vcr do
+      request_params = { 
+              origin: "Denver, CO",
+              destination: "ajfba",
+              api_key: @user.api_key
+              }
 
+      post "/api/v1/road_trip", params: request_params.to_json, headers: { "Content-Type": "application/json" }
+      expect(response).to have_http_status(:bad_request)
+
+      errors = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(errors[:errors].length).to eq(1)
+      expect(errors[:errors].first).to eq('Looks like there was a problem finding these locations.')
+    end
+  end
 end
